@@ -47,9 +47,15 @@ connectDB();
 
 const app = express();
 const httpServer = createServer(app);
+
+const allowedOrigins = [
+  'https://instagram-1.onrender.com',
+  'http://localhost:3000',
+];
+
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: allowedOrigins,
     credentials: true,
   },
 });
@@ -57,10 +63,9 @@ const io = new Server(httpServer, {
 setupSocket(io);
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: allowedOrigins,
   credentials: true,
 }));
-
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
