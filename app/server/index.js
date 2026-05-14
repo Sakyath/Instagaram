@@ -100,6 +100,11 @@ app.use('/api/reports', reportRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/hashtags', hashtagRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Backend is running successfully 🚀');
+});
+
+
 app.use(notFound);
 app.use(errorHandler);
 
