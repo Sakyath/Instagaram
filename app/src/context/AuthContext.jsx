@@ -8,9 +8,9 @@ export const useAuth = () => useContext(AuthContext);
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL
     ? `${import.meta.env.VITE_API_URL}/api`
-    : 'http://localhost:5000/api',
+    : 'https://insagaram-4tff.onrender.com/api',
   withCredentials: true,
-}); 
+});
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
