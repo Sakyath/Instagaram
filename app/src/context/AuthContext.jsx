@@ -10,7 +10,7 @@ const api = axios.create({
     ? `${import.meta.env.VITE_API_URL}/api`
     : 'http://localhost:5000/api',
   withCredentials: true,
-});
+}); 
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
