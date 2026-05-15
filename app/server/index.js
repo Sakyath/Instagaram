@@ -4,7 +4,6 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
-import mongoSanitize from 'express-mongo-sanitize';
 import fileUpload from 'express-fileupload';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
@@ -37,7 +36,6 @@ import reportRoutes from './routes/reports.js';
 import adminRoutes from './routes/admin.js';
 import hashtagRoutes from './routes/hashtags.js';
 
-// Create uploads directory if it doesn't exist
 const uploadsDir = path.join(__dirname, '../public/uploads');
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
@@ -49,7 +47,8 @@ const app = express();
 const httpServer = createServer(app);
 
 const allowedOrigins = [
-  'https://instagram-1.onrender.com',
+  'https://instagaram-1.onrender.com',
+  'https://sakyath.github.io',
   'http://localhost:3000',
 ];
 
@@ -66,11 +65,11 @@ app.use(cors({
   origin: allowedOrigins,
   credentials: true,
 }));
+
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
 app.use(compression());
-// app.use(mongoSanitize());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
@@ -86,7 +85,6 @@ app.use(fileUpload({
   abortOnLimit: true,
 }));
 
-// Serve uploaded files statically
 app.use('/uploads', express.static(uploadsDir));
 
 app.use('/api', apiLimiter);
@@ -108,7 +106,6 @@ app.use('/api/hashtags', hashtagRoutes);
 app.get('/', (req, res) => {
   res.send('Backend is running successfully 🚀');
 });
-
 
 app.use(notFound);
 app.use(errorHandler);
