@@ -8,7 +8,7 @@ export const useAuth = () => useContext(AuthContext);
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL
     ? `${import.meta.env.VITE_API_URL}/api`
-    : 'https://insagaram-4tff.onrender.com/api',
+: 'https://instagaram-4tff.onrender.com/api',
   withCredentials: true,
 });
 
