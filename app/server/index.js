@@ -46,15 +46,10 @@ connectDB();
 const app = express();
 const httpServer = createServer(app);
 
-const allowedOrigins = [
-  'https://instagaram-1.onrender.com',
-  'https://sakyath.github.io',
-  'http://localhost:3000',
-];
-
+// Allow all origins to fix CORS
 const io = new Server(httpServer, {
   cors: {
-    origin: allowedOrigins,
+    origin: true,
     credentials: true,
   },
 });
@@ -62,7 +57,7 @@ const io = new Server(httpServer, {
 setupSocket(io);
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: true,
   credentials: true,
 }));
 
